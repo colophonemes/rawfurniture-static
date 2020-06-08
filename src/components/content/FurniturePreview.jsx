@@ -47,7 +47,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function FurniturePreview ({ title, slug, images, body, sold }) {
   const featuredImage = images[0]
-  console.log(`url('https://${featuredImage.src}?w=600')`)
   const classes = useStyles({ featuredImage })
   return <Card>
     <Link href={`/furniture/${slug}`} className={classes.link}>

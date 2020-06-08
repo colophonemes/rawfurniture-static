@@ -14,7 +14,6 @@ const useStyles = makeStyles(theme => ({
 
 export default function Page({ title, body, featuredImages, pageTitleWidth }) {
   const classes = useStyles()
-  console.log(process.env.NEXT_PUBLIC_SITE_TITLE)
   return <>
     <article>
       <Head>

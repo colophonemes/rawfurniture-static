@@ -24,6 +24,8 @@ export default function FurnitureFromSlug({ data, preview }) {
     return <ErrorPage />
   }
 
+  if (router.isFallback) return 'Loading...'
+
   const { title, body, images, price, dimensions, sold, categories } = data
   return <article>
     <Head>

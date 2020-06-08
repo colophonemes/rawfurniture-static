@@ -10,6 +10,8 @@ export default function PageFromSlug({ data, preview }) {
     return <ErrorPage />
   }
 
+  if (router.isFallback) return 'Loading...'
+
   const {title, body, featuredImages} = data
   const props = { title, body, featuredImages }
   return <Page {...props} />

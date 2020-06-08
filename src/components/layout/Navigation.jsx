@@ -61,10 +61,17 @@ const makeTab = ({ title, href, as, icon }) => {
 const Navigation = props => {
   const classes = useStyles()
   const router = useRouter()
-  const activeIndex = routes.findIndex(({as, href}) => (as || href) === router.asPath)
+  let activeIndex = routes.findIndex(({as, href}) => {
+    // exact match
+    if ((as || href) === router.asPath) return true
+    // partial match
+    if ((as || href).split('/')[1] === router.asPath.split('/')[1]) return true
+    // no match
+    return false
+  })
   return <div>
     <AppBar position='static'>
-      <Tabs centered value={activeIndex}>
+      <Tabs centered value={activeIndex === -1 ? false : activeIndex}>
         {routes.map(makeTab)}
       </Tabs>
     </AppBar>

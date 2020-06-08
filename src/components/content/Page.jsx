@@ -12,7 +12,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function Page({ title, body, featuredImages, pageTitleWidth }) {
+export default function Page({ title, body, featuredImages, pageTitleWidth, rightColumn }) {
   const classes = useStyles()
   return <>
     <article>
@@ -24,8 +24,9 @@ export default function Page({ title, body, featuredImages, pageTitleWidth }) {
         <Grid item md={6}>
           {renderDocument(body)}
         </Grid>
-        {featuredImages && <Grid item md={6}>
-          {featuredImages.map(({ id, title, src }) => <ContentfulImage key={id} src={src} title={title} className={classes.featuredImage} />)}
+        {(featuredImages || rightColumn) && <Grid item md={6}>
+          {rightColumn}
+          {featuredImages && featuredImages.map(({ id, title, src }) => <ContentfulImage key={id} src={src} title={title} className={classes.featuredImage} />)}
         </Grid>}
       </Grid>
     </article>

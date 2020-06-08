@@ -6,10 +6,10 @@ const styles = {
     fontFamily: 'AgencyFB',
     src: `
       local('AgencyFB'), local('Agency FB'),
-      url('../fonts/agencyb-webfont.eot?#iefix') format('embedded-opentype'),
-      url('../fonts/agencyb-webfont.woff') format('woff'),
-      url('../fonts/agencyb-webfont.ttf') format('truetype'),
-      url('../fonts/agencyb-webfont.svg#agency_fbbold') format('svg');
+      url('/fonts/agencyb-webfont.eot?#iefix') format('embedded-opentype'),
+      url('/fonts/agencyb-webfont.woff') format('woff'),
+      url('/fonts/agencyb-webfont.ttf') format('truetype'),
+      url('/fonts/agencyb-webfont.svg#agency_fbbold') format('svg');
     `
   },
   body: {

@@ -26,8 +26,17 @@ const useStyles = makeStyles(theme => ({
   },
   media: {
     height: 230,
-    overflow: 'hidden'
+    overflow: 'hidden',
+    width: '100%'
   },
+  image: ({ featuredImage }) => ({
+    width: '100%',
+    height: 230,
+    backgroundImage: `url('https://${featuredImage.src}?w=600')`,
+    backgroundSize: 'cover',
+    backgroundRepeat: 'no-repeat',
+    backgroundPosition: 'center'
+  }),
   contentHeading: {
     overflow: 'hidden',
     whiteSpace: 'nowrap',
@@ -38,13 +47,14 @@ const useStyles = makeStyles(theme => ({
 
 export default function FurniturePreview ({ title, slug, images, body, sold }) {
   const featuredImage = images[0]
-  const classes = useStyles()
+  console.log(`url('https://${featuredImage.src}?w=600')`)
+  const classes = useStyles({ featuredImage })
   return <Card>
     <Link href={`/furniture/${slug}`} className={classes.link}>
       <CardActionArea>
         <Badge badgeContent={sold ? 'sold' : null} color='primary' className={classes.badge}>
           <CardMedia className={classes.media}>
-            {featuredImage && <ContentfulImage src={featuredImage.src} title={featuredImage.title} />}
+            {featuredImage && <div className={classes.image} />}
           </CardMedia>
         </Badge>
         <CardContent>

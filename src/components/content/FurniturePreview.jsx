@@ -3,9 +3,8 @@ import Card from '@material-ui/core/Card'
 import CardActionArea from '@material-ui/core/CardActionArea'
 import CardMedia from '@material-ui/core/CardMedia'
 import CardContent from '@material-ui/core/CardContent'
-import Badge from '@material-ui/core/Badge'
-import ContentfulImage from 'components/contentful/Image'
 import { makeStyles } from '@material-ui/styles'
+import { useBreakpoints } from 'global/breakpoints'
 import Link from 'components/Link'
 
 const useStyles = makeStyles(theme => ({
@@ -24,15 +23,15 @@ const useStyles = makeStyles(theme => ({
       fontWeight: 700
     }
   },
-  media: {
-    height: 230,
+  media: ({ xsOnly, mdUp }) => ({
+    height: xsOnly || mdUp ? 230 : 400,
     overflow: 'hidden',
     width: '100%'
-  },
-  image: ({ featuredImage }) => ({
+  }),
+  image: ({ featuredImage, xsOnly, mdUp }) => ({
     width: '100%',
-    height: 230,
-    backgroundImage: `url('https://${featuredImage.src}?w=600')`,
+    height: xsOnly || mdUp ? 230 : 400,
+    backgroundImage: `url('https://${featuredImage.src}?w=${mdUp ? 600 : 400}')`,
     backgroundSize: 'cover',
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'center'
@@ -45,17 +44,16 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function FurniturePreview ({ title, slug, images, body, sold }) {
+export default function FurniturePreview ({ title, slug, images }) {
   const featuredImage = images[0]
-  const classes = useStyles({ featuredImage })
+  const breakpoints = useBreakpoints()
+  const classes = useStyles({ featuredImage, ...breakpoints })
   return <Card>
     <Link href={`/furniture/${slug}`} className={classes.link}>
       <CardActionArea>
-        <Badge badgeContent={sold ? 'sold' : null} color='primary' className={classes.badge}>
-          <CardMedia className={classes.media}>
-            {featuredImage && <div className={classes.image} />}
-          </CardMedia>
-        </Badge>
+        <CardMedia className={classes.media}>
+          {featuredImage && <div className={classes.image} />}
+        </CardMedia>
         <CardContent>
           <Typography className={classes.contentHeading} variant='h5' component='h2' color='textPrimary'>{title}</Typography>
         </CardContent>

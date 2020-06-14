@@ -52,6 +52,7 @@ const theme = createMuiTheme({
       root: {
         textTransform: 'none',
         fontFamily: headingFontFamily,
+        fontSize: '1.5em',
         '&$selected': {
           backgroundColor: '#333'
         }

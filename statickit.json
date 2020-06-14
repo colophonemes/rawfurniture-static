@@ -19,7 +19,40 @@
       "actions": [
         {
           "type": "email",
-          "to": "sam+rawfurniture@samdeere.com"
+          "to": "enquiries@rawfurniture.com.au"
+        }
+      ],
+      "allowExtraFields": false
+    },
+    "furnitureEnquiry": {
+      "name": "Furniture Enquiry",
+      "fields": {
+        "name": {
+          "type": "text",
+          "required": true
+        },
+        "email": {
+          "type": "email",
+          "required": true
+        },
+        "telephone": {
+          "type": "text",
+          "required": false,
+          "prettyName": "Phone number"
+        },
+        "message": {
+          "type": "text",
+          "required": false
+        },
+        "meta": {
+          "type": "text",
+          "required": false
+        }
+      },
+      "actions": [
+        {
+          "type": "email",
+          "to": "enquiries@rawfurniture.com.au"
         }
       ],
       "allowExtraFields": false

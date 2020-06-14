@@ -1,24 +1,34 @@
+import {useState} from 'react'
 import Head from 'next/head'
 import { useRouter } from 'next/router'
 import ErrorPage from 'components/content/ErrorPage'
 import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
+import Typography from '@material-ui/core/Typography'
 import { getEntry, getAllEntries } from 'lib/contentful/entries'
 import PageTitle from 'components/layout/PageTitle'
 import ImageCarousel from 'components/ImageCarousel'
 import Currency from 'components/Currency'
 import ContentfulImage from 'components/contentful/Image'
-import Link from 'components/Link'
+import { Link, RouterLinkWithRef } from 'components/Link'
+import FurnitureEnquiryModal from 'components/FurnitureEnquryModal'
 import { renderDocument } from 'lib/contentful/render'
-import { Typography } from '@material-ui/core'
-
+import { makeStyles } from '@material-ui/styles'
 
 const CONTENT_TYPE = 'furniture'
+
+const useStyles = makeStyles(theme => ({
+  specificationItems: {
+    marginBottom: theme.spacing(2)
+  }
+}))
 
 const SpecificationItem = props => <Typography gutterBottom color='textPrimary' {...props} />
 
 export default function FurnitureFromSlug({ data, preview }) {
   const router = useRouter()
-  // const classes = useStyles()
+  const classes = useStyles()
+  const [showEnquiryModal, setShowEnquiryModal] = useState(false)
 
   if (!router.isFallback && !data) {
     return <ErrorPage />
@@ -26,7 +36,7 @@ export default function FurnitureFromSlug({ data, preview }) {
 
   if (router.isFallback) return 'Loading...'
 
-  const { title, body, images, price, dimensions, sold, categories } = data
+  const { title, body, images, price, dimensions, categories } = data
   return <article>
     <Head>
       <title>{title} | Furniture | {process.env.NEXT_PUBLIC_SITE_TITLE}</title>
@@ -43,16 +53,23 @@ export default function FurnitureFromSlug({ data, preview }) {
       </Grid>
       <Grid item md={6}>
         {renderDocument(body)}
-        {price && <SpecificationItem><strong>Price:</strong> <Currency value={price} /></SpecificationItem>}
-        {dimensions && <SpecificationItem><strong>Dimensions:</strong> {dimensions}</SpecificationItem>}
-        {sold && <SpecificationItem>
-          <em>
-            <>This Item Has Been Sold.</>{' '}
-            Please feel free to <Link href='/:slug' as='/contact'>contact us</Link> if you'd like to discuss commissioning a similar piece.
-          </em>
-        </SpecificationItem>}
+        <div className={classes.specificationItems}>
+          {price && <SpecificationItem><strong>Price from:</strong> <Currency value={price} /></SpecificationItem>}
+          {dimensions && <SpecificationItem>
+            <strong>Approximate Dimensions:</strong> {dimensions}<br />
+            <em>(item dimensions can be customised to your specifications)</em>
+          </SpecificationItem>}
+        </div>
+        <Button onClick={() => setShowEnquiryModal(true)} variant='contained'>
+          Enquire about this item
+        </Button>
       </Grid>
     </Grid>
+    <FurnitureEnquiryModal
+      open={showEnquiryModal}
+      onClose={() => setShowEnquiryModal(false)}
+      furniture={{ title, url: `https://${process.env.NEXT_PUBLIC_SITE_DOMAIN}${router.asPath}` }}
+    />
   </article>
 }
 

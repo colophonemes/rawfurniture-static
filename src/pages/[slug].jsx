@@ -27,7 +27,7 @@ export async function getStaticProps({ params, preview = false }) {
   }
 }
 
-const STANDALONE_PAGE_SLUGS = ['home', 'contact']
+const STANDALONE_PAGE_SLUGS = ['home', 'contact', 'furniture']
 
 export async function getStaticPaths () {
   const { entries } = await getAllEntries({contentType: 'page'})

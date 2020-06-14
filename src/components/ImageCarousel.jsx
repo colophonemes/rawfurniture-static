@@ -107,7 +107,7 @@ export default function ImageCarousel ({images}) {
     </CarouselProvider>
     <Dialog open={!!enlargedImageSrc} onClose={() => setEnlargedImageSrc(null)} fullWidth maxWidth='xl' transitionDuration={200}>
       <DialogContent>
-        <img src={`https:${enlargedImageSrc}?w=1200`} className={classes.enlargedImage} />
+        {enlargedImageSrc && <img src={`https:${enlargedImageSrc}?w=1200`} className={classes.enlargedImage} />}
       </DialogContent>
       <DialogActions>
         <Button onClick={() => setEnlargedImageSrc(null)}>Close</Button>

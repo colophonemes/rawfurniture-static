@@ -43,7 +43,7 @@ export default function FurnitureFromSlug({ data, preview }) {
     </Head>
     <PageTitle>{title}</PageTitle>
     <Grid container spacing={6}>
-      <Grid item md={6}>
+      <Grid item xs={12} md={6}>
         {images && <>
           {images.length > 1
             ? <ImageCarousel images={images} />
@@ -51,7 +51,7 @@ export default function FurnitureFromSlug({ data, preview }) {
           }
         </>}
       </Grid>
-      <Grid item md={6}>
+      <Grid item xs={12} md={6}>
         {renderDocument(body)}
         <div className={classes.specificationItems}>
           {price && <SpecificationItem><strong>Price from:</strong> <Currency value={price} /></SpecificationItem>}

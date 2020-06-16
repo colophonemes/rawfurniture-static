@@ -40,7 +40,8 @@ const useStyles = makeStyles(theme => ({
     overflow: 'hidden',
     whiteSpace: 'nowrap',
     width: '100%',
-    textOverflow: 'ellipsis'
+    textOverflow: 'ellipsis',
+    textTransform: 'lowercase'
   }
 }))
 

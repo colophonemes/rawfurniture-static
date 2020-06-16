@@ -20,6 +20,9 @@ const useStyles = makeStyles(theme => ({
   listItem: {
     width: 200,
     color: theme.palette.text.primary
+  },
+  tab: {
+    textTransform: 'lowercase'
   }
 }))
 
@@ -59,6 +62,7 @@ const routes = [
 const makeTab = ({ title, href, as, icon }) => {
   const formattedHref = formatInternalLink(as || href)
   const isRelative = isRelativeLink(formattedHref)
+  const classes = useStyles()
   return <Tab
     key={as || formattedHref}
     label={!icon && title}
@@ -68,6 +72,7 @@ const makeTab = ({ title, href, as, icon }) => {
     as={as}
     target={!isRelative ? '_blank' : null}
     rel={!isRelative ? 'noopener noreferrer' : null}
+    className={classes.tab}
   />
 }
 

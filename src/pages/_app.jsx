@@ -9,7 +9,7 @@ import Base from 'components/layout/Base'
 import 'pure-react-carousel/dist/react-carousel.es.css'
 // import { MDXProvider } from '@mdx-js/react'
 // import MDXRenderers from 'components/MDXRenderers'
-import { StaticKitProvider } from '@statickit/react'
+import { FormspreeProvider } from '@formspree/react'
 
 class MyApp extends App {
 
@@ -25,13 +25,13 @@ class MyApp extends App {
     const { Component, pageProps } = this.props
     return <React.Fragment>
       <CssBaseline />
-      <StaticKitProvider site={process.env.NEXT_PUBLIC_STATICKIT_SITE_ID}>
+      <FormspreeProvider project={process.env.NEXT_PUBLIC_FORMSPREE_PROJECT_ID}>
         <ThemeProvider theme={theme}>
           <Base>
             <Component {...pageProps} />
           </Base>
         </ThemeProvider>
-      </StaticKitProvider>
+      </FormspreeProvider>
     </React.Fragment>
   }
 }
